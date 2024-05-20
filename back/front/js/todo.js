@@ -128,7 +128,9 @@ function cudController(event){
 
     // ㄱ. create 이벤트 처리
 
-    if(targetTagName ==="INPUT" && key === "Enter"){       // input 에서 엔터키가 눌림
+    if(targetTagName ==="INPUT" && key === "Enter" ||
+    targetTagName ==="INPUT" && key === "="
+    ){       // input 에서 엔터키가 눌림
         createTodo(event, token);         // 하단에  ### 2. 생성하기  ######
 
         return;   // if 문에 걸리면 다음코드 읽을 필요 없음
