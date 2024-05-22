@@ -41,12 +41,16 @@
 
 
 .matrix-input{
-    width: 90%;
+    width: 80%;
     font-size: 1.6rem;
     margin-top: 1rem;
     padding-left: 0.5rem;
     line-height: 1.8;
 
+}
+.todo-input{
+    margin-right: 0.5rem;
+    cursor: pointer;
 }
 
 /* 아이탬 리스트 */

@@ -95,7 +95,7 @@ async function readTodo(){
 //             </li>
 
 
-
+const buttonEnter = document.getElementById("enter");
 
 
 // ##################   2. 일정 CUD    ##############
@@ -118,7 +118,7 @@ function cudController(event){
     //console.log(event);    // 이벤트의 필요한 객체(요소)를 조회한다
 
     // 이벤트 상수 정의하기
-   
+    // event.target.tagName
     const target = event.target;              // 이벤트가 일어난 곳
     const targetTagName = target.tagName;     // 이벤트가 일어난 태그네임
     const eventType = event.type;             // 이벤트의 종류는 ?
@@ -128,14 +128,20 @@ function cudController(event){
 
     // ㄱ. create 이벤트 처리
 
-    if(targetTagName ==="INPUT" && key === "Enter" ||
-    targetTagName ==="INPUT" && key === "/"
-    ){       // input 에서 엔터키가 눌림
+    if(targetTagName ==="INPUT" && key === "Enter"){       // input 에서 엔터키가 눌림
         createTodo(event, token);         // 하단에  ### 2. 생성하기  ######
 
         return;   // if 문에 걸리면 다음코드 읽을 필요 없음
     }
+    if(targetTagName ==="BUTTON" && eventType === "click"){       // input 에서 엔터키가 눌림
+     //   console.log("button press !!!");
+        createTodo(event, token);         // 하단에  ### 2. 생성하기  ######
 
+        return;   // if 문에 걸리면 다음코드 읽을 필요 없음
+    }
+    // ##########################################################
+    //  buttonEnter.addEventListener("click",createTodo(event, token));
+    // #########################################################
 
 
     // ㄴ. update 이벤트 처리
@@ -178,12 +184,25 @@ function cudController(event){
 //      ### 2. 생성하기  ######
 
 async function createTodo(event, token){
-    const contents = event.target.value;    //event.target 의 내용
-
+ 
+    let contents =" ";
+    if ( event.target.tagName==="INPUT"  ){
+         contents = event.target.value;    //event.target 의 내용
+    } 
+    else{  
+     
+        // console.log(document.getElementsByClassName("matrix-input")[0].value);
+        //contents =document.getElementsByClassName("matrix-input")[0].value;
+        //console.log("input x   222"+event.target);
+        contents = event.target.previousElementSibling.value;
+        //console.log("event.target.previousSibling   "+contents);
+        //  contents = event.target.closest(".matrix-input").value;
+    }
+    
     //input에서 가장 가까운 부모중 matrix-item의 id값을 가져온다    
     const type = event.target.closest(".matrix-item").id;   
-
-    // console.log(contents , type);   //    "테스트"    decide
+    //console.log(1);
+    //console.log("1111   " + contents , type);   //    "테스트"    decide
 
     if(!contents){
         alert ("내용을 입력해주세요");
